@@ -45,12 +45,14 @@ export AWS_DEFAULT_REGION=$S3_REGION
 
 for COLLACTION in $COLLACTIONS_FULL
 do
-    echo $COLLACTION
+    echo "Dump $COLLACTION"
+    mongodump --host $MONGODB_HOST --username $MONGODB_USER --password $MONGODB_PASS --authenticationDatabase admin -d=$MONGODB_DB -c=$COLLACTION --out /backup
 done
 
 for COLLACTION in $COLLACTIONS_LAST_DAY
 do
-    echo $COLLACTION
+    echo "Dump $COLLACTION"
+    mongodump --host $MONGODB_HOST --username $MONGODB_USER --password $MONGODB_PASS --authenticationDatabase admin -d=$MONGODB_DB -c=$COLLACTION -q='{"createdAt":{"$gt": {"$date":"'$start'"}, "$lte": {"$date":"'$end'"}}}' --out /backup
 done
 echo $start
 echo $end
@@ -58,4 +60,6 @@ echo $end
 echo "Uploading dump to $S3_BUCKET"
 tar cfz "/backup/$file.tar.gz" /backup
 aws s3 cp "/backup/$file.tar.gz" s3://$S3_BUCKET/$S3_PREFIX/$file.tar.gz
+rm -rf /backup/api
+rm /backup/$file.tar.gz
 echo "MongoDB backup uploaded successfully"
