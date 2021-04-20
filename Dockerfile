@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-RUN apk update && apk add mongodb-tools python3 py3-pip && pip3 install awscli && rm -rf /var/cache/apk/*
+RUN apk update && apk add mongodb-tools python3 py3-pip && pip3 install awscli coreutils && rm -rf /var/cache/apk/*
 
 ENV MONGODB_HOST **None**
 ENV MONGODB_PORT **None**
