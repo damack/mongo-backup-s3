@@ -60,6 +60,6 @@ echo $end
 echo "Uploading dump to $S3_BUCKET"
 tar cfz "/backup/$file.tar.gz" /backup
 aws s3 cp "/backup/$file.tar.gz" s3://$S3_BUCKET/$S3_PREFIX/$file.tar.gz
-rm -rf /backup/api
+rm -rf /backup/$MONGODB_DB
 rm /backup/$file.tar.gz
 echo "MongoDB backup uploaded successfully"
