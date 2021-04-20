@@ -46,19 +46,11 @@ export AWS_DEFAULT_REGION=$S3_REGION
 for COLLACTION in $COLLACTIONS_FULL
 do
     echo $COLLACTION
-    if [[ -z "${!COLLACTION}" ]]; then
-        echo "Warning - the $COLLACTION environment variable isn't set"
-        exit 1
-    fi
 done
 
 for COLLACTION in $COLLACTIONS_LAST_DAY
 do
     echo $COLLACTION
-    if [[ -z "${!COLLACTION}" ]]; then
-        echo "Warning - the $COLLACTION environment variable isn't set"
-        exit 1
-    fi
 done
 echo $start
 echo $end
