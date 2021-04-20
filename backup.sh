@@ -58,7 +58,7 @@ echo $start
 echo $end
 
 echo "Tar dump $file.tar.gz"
-tar cfzP "/backup/$file.tar.gz" /backup/$MONGODB_DB
+tar cfz "/backup/$file.tar.gz" /backup/$MONGODB_DB
 echo "Uploading dump to $S3_BUCKET"
 aws s3 cp "/backup/$file.tar.gz" s3://$S3_BUCKET/$S3_PREFIX/$file.tar.gz
 rm -rf /backup/$MONGODB_DB
